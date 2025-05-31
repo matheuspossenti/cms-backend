@@ -1,11 +1,11 @@
-import { z } from "zod/v4";
+import { number, object, string } from "yup";
 
-const envSchema = z.object({
-  NODE_ENV: z
-    .enum(["development", "production", "test"])
-    .default("development"),
-  MONGODB_URI: z.string().default("mongodb://localhost:27017/cms"),
-  PORT: z.coerce.number().default(8080),
+const envSchema = object({
+  NODE_ENV: string().oneOf(["development", "production", "test"])
+    .default("development").required('NODE_ENV é obrigatório'),
+  JWT_SECRET: string().required('JWT_SECRET é obrigatório'),
+  MONGODB_URI: string().required('MONGODB_URI é obrigatório'),
+  PORT: number().default(8080).required('PORT é obrigatório'),
 });
 
-export const env = envSchema.parse(process.env);
+export const env = envSchema.validateSync(process.env);

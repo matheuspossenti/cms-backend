@@ -17,9 +17,9 @@ export class Account extends BaseEntity<IAccountProps> {
   }
 
   private readonly roleWeight: Record<"redator" | "editor", number> = {
-    'redator': 1,
-    'editor': 2,
-  }
+    redator: 1,
+    editor: 2,
+  };
 
   get role() {
     return this.props.role;
@@ -73,7 +73,7 @@ export class Account extends BaseEntity<IAccountProps> {
   }
 
   canAccessThisFeature({ requiredRole }: CanAccessThisFeatureType): boolean {
-    return this.roleWeight[this.role] >= this.roleWeight[requiredRole]
+    return this.roleWeight[this.role] >= this.roleWeight[requiredRole];
   }
 
   static create(
@@ -106,5 +106,5 @@ export class Account extends BaseEntity<IAccountProps> {
 }
 
 type CanAccessThisFeatureType = {
-  requiredRole: 'redator' | 'editor'
-}
+  requiredRole: "redator" | "editor";
+};

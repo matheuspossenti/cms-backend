@@ -31,7 +31,6 @@ export class CreateAccountUseCase {
     password,
     role,
   }: ICreateAccountRequest): Promise<ICreateAccountResponse> {
-    console.log(role);
     await validate(createAccountYupSchema, { email, name, role });
 
     const existingAccount = await this.accountRepository.getByEmail(email);

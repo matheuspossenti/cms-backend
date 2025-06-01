@@ -1,7 +1,6 @@
 import { AccountsModel } from "../schemas/accounts.schema";
 import { Account } from "@/domain/authentication/entities/account";
 import { IAccountRepository } from "@/domain/authentication/repositories/account-repository";
-import { PaginationParams, PaginationResponse } from "@/core/types/pagination";
 import { ResourceNotFoundError } from "@/core/errors/resource-not-found.error";
 import { ClientSession } from "mongoose";
 import { MongooseAccountMapper } from "../mappers/mongoose-account.mapper";

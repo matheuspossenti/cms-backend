@@ -7,7 +7,6 @@ interface CreateAccountServiceRequest {
   email: string
   password: string
   role: 'redator' | 'editor'
-  requester: Account
 }
 
 interface CreateAccountServiceResponse {
@@ -26,18 +25,7 @@ export class CreateAccountService {
     name,
     password,
     role,
-    requester,
   }: CreateAccountServiceRequest): Promise<CreateAccountServiceResponse> {
-    // if (
-    //   !requester.canAccessThisFeature({
-    //     resource: 'manageAccounts',
-    //     tenantId: new UniqueEntityObjectId(tenantId),
-    //     environmentToCheck: AccountRoleEnvironmentType.TENANT,
-    //   })
-    // ) {
-    //   throw new ForbiddenError('Você não tem permissão para acessar essa funcionalidade')
-    // }
-
       const { account } = await this.createAccountUseCase.execute({
         email,
         name,

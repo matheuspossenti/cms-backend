@@ -16,6 +16,11 @@ export class Account extends BaseEntity<IAccountProps> {
     this.props.updatedAt = new Date();
   }
 
+  private readonly roleWeight: Record<"redator" | "editor", number> = {
+    'redator': 1,
+    'editor': 2,
+  }
+
   get role() {
     return this.props.role;
   }
@@ -67,6 +72,10 @@ export class Account extends BaseEntity<IAccountProps> {
     this.touch();
   }
 
+  canAccessThisFeature({ requiredRole }: CanAccessThisFeatureType): boolean {
+    return this.roleWeight[this.role] >= this.roleWeight[requiredRole]
+  }
+
   static create(
     props: Optional<
       IAccountProps,
@@ -94,4 +103,8 @@ export class Account extends BaseEntity<IAccountProps> {
     this.props.deletedBy = deletedBy;
     this.props.deletedAt = new Date();
   }
+}
+
+type CanAccessThisFeatureType = {
+  requiredRole: 'redator' | 'editor'
 }

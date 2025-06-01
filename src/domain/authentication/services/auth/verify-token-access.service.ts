@@ -30,7 +30,7 @@ export class VerifyAccessTokenService {
         throw new UnauthorizedError('Token inválido')
       }
 
-      const { sub, tenantId } = token
+      const { sub } = token
 
       const { account } = await this.getAccountByIdUseCase.execute({
         id: sub,

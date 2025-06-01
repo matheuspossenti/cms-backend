@@ -3,7 +3,6 @@ import { DeleteAccountByIdUseCase } from '../../use-cases/account/delete-account
 import { inject, injectable } from 'tsyringe'
 
 interface DeleteAccountServiceRequest {
-  tenantId: string
   accountId: string
   requester: Account
 }
@@ -15,17 +14,7 @@ export class DeleteAccountService {
     private readonly deleteAccountByIdUseCase: DeleteAccountByIdUseCase
   ) {}
 
-  async execute({ accountId, tenantId, requester }: DeleteAccountServiceRequest): Promise<void> {
-    // if (
-    //   !requester.canAccessThisFeature({
-    //     resource: 'manageAccounts',
-    //     tenantId: new UniqueEntityObjectId(tenantId),
-    //     environmentToCheck: AccountRoleEnvironmentType.TENANT,
-    //   })
-    // ) {
-    //   throw new ForbiddenError('Você não tem permissão para acessar essa funcionalidade')
-    // }
-
+  async execute({ accountId, requester }: DeleteAccountServiceRequest): Promise<void> {
     await this.deleteAccountByIdUseCase.execute({ id: accountId, deletedBy: requester.id })
   }
 }

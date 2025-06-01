@@ -33,5 +33,5 @@ export class DeleteAccountByIdUseCase {
 }
 
 const getAccountYupSchema = object({
-  id: string().objectId('Id inválido').required('Id é obrigatório'),
+  id: string().required('Id é obrigatório'),
 })

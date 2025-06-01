@@ -61,7 +61,7 @@ export class UpdateAccountUseCase {
 }
 
 const updateAccountYupSchema = object({
-  id: string().objectId('Id inválido').required('Id é obrigatório'),
+  id: string().required('Id é obrigatório'),
   name: string().min(3, 'Nome deve conter ao menos 3 caracteres').optional(),
   email: string().email('Deve ser um email válido').optional(),
 })

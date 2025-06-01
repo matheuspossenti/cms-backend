@@ -1,4 +1,4 @@
-import { Account } from '@/domain/authentication/entities/account'
+import { Account } from "@/domain/authentication/entities/account";
 
 export class AccountPresenter {
   static toHttp(account: Account) {
@@ -9,6 +9,6 @@ export class AccountPresenter {
       role: account.role,
       createdAt: account.createdAt.toISOString(),
       updatedAt: account.updatedAt.toISOString(),
-    }
+    };
   }
 }

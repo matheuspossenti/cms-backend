@@ -39,7 +39,7 @@ export class SubmitContentForReviewUseCase {
     }
 
     // Verificar se o usuário é o autor do conteúdo
-    if (content.authorId !== authorId) {
+    if (content.authorId.equals(authorId) === false) {
       throw new ForbiddenError(
         "Only the author can submit this content for review"
       );

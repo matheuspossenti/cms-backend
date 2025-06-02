@@ -47,6 +47,7 @@ export class ContentAccessProxy {
     // Aqui você implementaria a lógica real de verificação de permissão
     // Por exemplo, verificar se o usuário tem papel de revisor
     // Por enquanto, qualquer usuário diferente do autor pode revisar
+    
     if (content.authorId === userId) {
       throw new ForbiddenError("The author cannot review their own content");
     }
@@ -64,9 +65,6 @@ export class ContentAccessProxy {
       throw new ResourceNotFoundError(`Content with ID ${contentId} not found`);
     }
 
-    // Aqui você implementaria a lógica real de verificação de permissão
-    // Por exemplo, verificar se o usuário tem papel de editor
-    // Por enquanto, qualquer usuário pode publicar conteúdo aprovado
     if (content.status !== "approved") {
       throw new ForbiddenError("Only approved content can be published");
     }

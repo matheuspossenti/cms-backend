@@ -10,7 +10,7 @@ export abstract class ApprovalHandler {
 
   async handle(content: Content): Promise<void> {
     await this.process(content);
-    
+
     if (this.nextHandler) {
       await this.nextHandler.handle(content);
     }
@@ -18,4 +18,3 @@ export abstract class ApprovalHandler {
 
   protected abstract process(content: Content): Promise<void>;
 }
-

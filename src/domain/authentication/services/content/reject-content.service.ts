@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { RejectContentUseCase } from "../../use-cases/content/reject-content.use-case";
 import { Content } from "../../entities/content";
 import { ContentAccessProxy } from "../../proxies/content-access-proxy";
+import { UniqueEntityObjectId } from "@/core/entities/unique-entity-id";
 
 interface RejectContentServiceRequest {
   contentId: string;

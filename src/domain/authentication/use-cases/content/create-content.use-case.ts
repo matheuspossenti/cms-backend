@@ -45,9 +45,11 @@ export class CreateContentUseCase {
       );
     }
 
+    const templateCloned = template.clone();
+
     // Criar um objeto body vazio com base na estrutura do template
     const body: Record<string, string> = {};
-    template.structure.forEach((field) => {
+    templateCloned.structure.forEach((field) => {
       body[field] = "";
     });
 

@@ -1,6 +1,8 @@
 import "reflect-metadata";
 import "./container/repository";
 import "./container/encrypter";
+import "./container/use-cases";
+import "./container/services";
 import { logger } from "../core/logger";
 import { env } from "./env";
 import { MongooseDataSource } from "./db/mongoose/data-source";

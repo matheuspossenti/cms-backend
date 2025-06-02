@@ -1,0 +1,389 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-10-15T12:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_root",
+      "parentId": "wrk_cms_api",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}",
+      "name": "Root",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_cms_api",
+      "parentId": null,
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "name": "CMS API",
+      "description": "API para o sistema de gerenciamento de conteúdo",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_register",
+      "parentId": "fld_auth",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/accounts",
+      "name": "Register",
+      "description": "Registrar uma nova conta",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"John Doe\",\n\t\"email\": \"john@example.com\",\n\t\"password\": \"password123\",\n\t\"role\": \"author\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "_type": "request"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "wrk_cms_api",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "name": "Auth",
+      "description": "",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_login",
+      "parentId": "fld_auth",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/auth/login",
+      "name": "Login",
+      "description": "Fazer login na API",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"john@example.com\",\n\t\"password\": \"password123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_refresh_token",
+      "parentId": "fld_auth",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/auth/refresh-token",
+      "name": "Refresh Token",
+      "description": "Renovar o token de acesso",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"refreshToken\": \"{{ _.refreshToken }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_me",
+      "parentId": "fld_auth",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/auth/me",
+      "name": "Me",
+      "description": "Obter informações do usuário atual",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_template",
+      "parentId": "fld_templates",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/templates",
+      "name": "Create Template",
+      "description": "Criar um novo template",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"Blog Post\",\n\t\"structure\": [\"headline\", \"subheadline\", \"content\", \"tags\"]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "fld_templates",
+      "parentId": "wrk_cms_api",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "name": "Templates",
+      "description": "",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_get_template",
+      "parentId": "fld_templates",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/templates/{{ _.templateId }}",
+      "name": "Get Template",
+      "description": "Obter um template pelo ID",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_content",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents",
+      "name": "Create Content",
+      "description": "Criar um novo conteúdo",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"My First Blog Post\",\n\t\"templateId\": \"{{ _.templateId }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "fld_contents",
+      "parentId": "wrk_cms_api",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "name": "Contents",
+      "description": "",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_submit_for_review",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents/{{ _.contentId }}/submit",
+      "name": "Submit for Review",
+      "description": "Submeter conteúdo para revisão",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_approve_content",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents/{{ _.contentId }}/approve",
+      "name": "Approve Content",
+      "description": "Aprovar um conteúdo",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"notes\": \"Looks good, approved!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.reviewerAccessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_reject_content",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents/{{ _.contentId }}/reject",
+      "name": "Reject Content",
+      "description": "Rejeitar um conteúdo",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"notes\": \"Needs more work on the introduction.\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.reviewerAccessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_publish_content",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents/{{ _.contentId }}/publish",
+      "name": "Publish Content",
+      "description": "Publicar um conteúdo",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.editorAccessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_return_to_draft",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents/{{ _.contentId }}/return-to-draft",
+      "name": "Return to Draft",
+      "description": "Retornar um conteúdo para rascunho",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_run_approval_chain",
+      "parentId": "fld_contents",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "url": "{{ _.baseUrl }}/v1/contents/{{ _.contentId }}/run-approval-chain",
+      "name": "Run Approval Chain",
+      "description": "Executar a cadeia de aprovação",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.accessToken }}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_cms_api",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8080"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseUrl"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1697371200000,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_development",
+      "parentId": "env_base",
+      "modified": 1697371200000,
+      "created": 1697371200000,
+      "name": "Development",
+      "data": {
+        "accessToken": "",
+        "refreshToken": "",
+        "reviewerAccessToken": "",
+        "editorAccessToken": "",
+        "templateId": "",
+        "contentId": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "accessToken",
+          "refreshToken",
+          "reviewerAccessToken",
+          "editorAccessToken",
+          "templateId",
+          "contentId"
+        ]
+      },
+      "color": "#00ff00",
+      "isPrivate": false,
+      "metaSortKey": 1697371200000,
+      "_type": "environment"
+    }
+  ]
+}
